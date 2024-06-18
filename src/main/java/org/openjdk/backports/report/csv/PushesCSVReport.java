@@ -45,16 +45,20 @@ public class PushesCSVReport extends AbstractCSVReport {
 
         for (Issue i : model.byTime()) {
             String pushUser = Accessors.getPushUser(i);
-            out.printf("\"%s\", \"%s\", \"%s\", \"%s\"%n",
+            out.printf("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"%n",
                     i.getKey(),
                     i.getSummary(),
+                    i.getPriority().getName(),
+                    Accessors.extractComponents(i),
                     users.getDisplayName(pushUser),
                     users.getAffiliation(pushUser));
         }
         for (Issue i : model.noChangesets()) {
-            out.printf("\"%s\", \"%s\", \"N/A\", \"N/A\"%n",
+            out.printf("\"%s\",\"%s\",\"%s\",\"%s\",\"N/A\",\"N/A\"%n",
                     i.getKey(),
-                    i.getSummary());
+                    i.getSummary(),
+                    i.getPriority().getName(),
+                    Accessors.extractComponents(i));
         }
     }
 
